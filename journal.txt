@@ -1,0 +1,79 @@
+Jan 10:
+Tried using existing image and scale it - looks bad when scaled. Decided to draw my own pixelated car with dimensions i need.
+
+Jan 11:
+Wrote base code for game. Control car nicely and realistically. Made radar with lines (2 points and draw line)
+
+Jan 12:
+Collisions. Draw test track. Implementing track collisions (both are sprites collisions using masks). Tried to do radar with sprites as well.
+Collisions work but getting the point and distance is tricky. Decided to convert track into points with outline and check line intersections with radar.
+
+Jan 13:
+Implemented checking for line intersections with radar (that is now just lines drawn between 2 stored points for each beam) works well.
+One problem: has 2 invisible walls??!?!?!?!?! Bug in radar.py code
+Need to think where to put all radar and collision code.
+
+Jan 14:
+Fixed bug now checks line intersections properly and gets proper distances
+
+SUMMARY:
+Layer 1: Picture of road edges converted to sprite and collision checking using masks with the car that is also a picture converted to sprite
+Layer 2: Converting filled picture of road to points using outline(30) and picking every 30th point.
+         Using these points can construct lines that make the approximation of the road. Radar is also just lines (2 points: start and end)
+         So, can use line formulas to find point where radar intersects with the road and distance to it.
+Layer 3: In future add just a pretty layer for the user to make the road look nicer
+
+Jan 16:
+Draw full training track. Properly join the two halfs. Leave empty space in one spot so that the outline can be properly drawn.
+Draw missing lines
+
+Jan 18:
+Refactor radar: put it in a separate class. Car has instance of radar
+Appended points to pointList needed to draw missing lines
+Refactor radar: store all beam attributes in lists instead of an attribute for each single beam
+So all lists have 5 values: 1 for each beam
+Draw left part of pretty layer and finish line
+
+Jan 21:
+Finish pretty layer. Improved performance by adding convert_alpha() to loaded images to make them draw faster
+
+Jan 22:
+Racetrack class now has everything related to it. Started reward lines.
+
+Jan 23:
+Finished placing reward lines. Recording lap time and time when crossed each reward line.
+Resetting cross time activate/disable reward/finish lines on crash etc. Record number of laps and crashes before finishing a lap
+
+Feb 19:
+Started Implementing NN. Separated game in its own class and file. Can manually play game if launching game.py
+Added frame stepping function in game for NN to take action in a frame and get reward.
+
+Things to experiment with:
+Hidden nodes
+Number of actions
+Slow down car (yes/no)
+Point allocation
+Running action for multiple frames
+Squishing input? distances closer to max get close to 1
+Reward based on distances of radar beams
+
+Feb 20:
+Finished implementing NN. Implemented experience replay and ε-greedy exploration with decay
+
+Feb 21:
+2 short side beams. Award points based on how the action maximises distances and car speed. Reward lines bad?
+All 6 controls. Punish for stopping.
+
+TRY Double DQN!
+
+Feb 22: Fixed bug with radar - points on screen were floats instead of ints. Added more beams and made them different length
+
+Feb 29: Implemented Double DQN.
+
+March 1: Fixed Double DQN: wasn't properly copying weights.
+
+TRY Dueling DQN
+Maybe dont allow complete stop? limit speed to 1?
+
+March 4: Min speed of 1 with slow down, 4 actions and brakes works very well.
+Implemented dueling DDQN
