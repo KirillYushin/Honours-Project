@@ -1,5 +1,6 @@
 import pygame
 import math
+import collections
 from radar import Radar
 
 class Car(pygame.sprite.Sprite):
@@ -21,6 +22,8 @@ class Car(pygame.sprite.Sprite):
 		self.rect = self.image.get_rect()
 		self.rect.center = (self.x, self.y)
 		self.radar = Radar(setup)
+		self.distanceTravelledUntilCrash = collections.deque()
+		self.distanceTravelled = 0
 	
 	def draw(self, display):
 		display.blit(self.image, self.rect)
@@ -42,6 +45,8 @@ class Car(pygame.sprite.Sprite):
 		elif (self.direction <= -360):
 			self.direction += 360
 		
+		saveX = self.x
+		saveY = self.y
 		# Update car position
 		radians = self.direction * math.pi / 180
 		self.x += -self.speed * math.sin(radians)
@@ -55,6 +60,8 @@ class Car(pygame.sprite.Sprite):
 		
 		# Update Radar
 		self.radar.update(self.x, self.y, self.direction)
+		# Update distance travelled
+		self.distanceTravelled += distance((saveX, saveY), (self.x, self.y))
 		
 	# Reset car and place it at the start
 	def crash(self):
@@ -62,4 +69,11 @@ class Car(pygame.sprite.Sprite):
 		self.y = self.startingPosition[1]
 		self.speed = 0
 		self.direction = self.startingRotation
+		self.distanceTravelledUntilCrash.append(self.distanceTravelled)
+		self.distanceTravelled = 0
 		self.update()
+		
+# Calculate distance between two points
+def distance(p1, p2):
+	dist = math.sqrt((p2[0] - p1[0]) ** 2 + (p2[1] - p1[1]) ** 2)
+	return dist

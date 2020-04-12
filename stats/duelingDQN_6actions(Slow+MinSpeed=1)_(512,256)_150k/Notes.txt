@@ -1,0 +1,3 @@
+Very fast.
+Completes all 4 tracks.
+Slows down tries to avoid colisions very well

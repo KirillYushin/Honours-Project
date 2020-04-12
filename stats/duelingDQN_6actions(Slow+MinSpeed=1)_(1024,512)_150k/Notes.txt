@@ -1,0 +1,3 @@
+Fairly fast.
+Doesnt complete all tracks. Overfits to Training. Changes direction often.
+But still tries to avoid collision

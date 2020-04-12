@@ -4,10 +4,10 @@ class NeuralNetwork():
 	def __init__(self, inputSize, outputSize, scopeName):
 		self.inputSize = inputSize
 		self.outputSize = outputSize
-		self.hidden1Size = 512 #1024
-		self.hidden2Size = 256 #512
+		self.hidden1Size = 512
+		self.hidden2Size = 256
 		self.streamSize = self.hidden2Size // 2
-		self.learningRate = 0.01
+		self.learningRate = 0.001
 		
 		with tf.variable_scope(scopeName):
 			# Input state and target Q values
