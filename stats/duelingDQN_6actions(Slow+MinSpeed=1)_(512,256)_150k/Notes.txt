@@ -1,3 +1,6 @@
 Very fast.
 Completes all 4 tracks.
-Slows down tries to avoid colisions very well
+Slows down tries to avoid colisions very well.
+Stays in the middle of the road (check)
+
+Dueling takes 30-40 mins

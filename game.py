@@ -42,7 +42,7 @@ class Game:
 			self.mainQN = NeuralNetwork(self.car.radar.numBeams + 1, 6, "main")
 			self.saver = tf.train.Saver()
 			self.sess = tf.Session()
-			self.saver.restore(self.sess, "./checkpoints/session_duelingDQN_4actions(Slow+MinSpeed=1)_(1024,512)_150k.ckpt")
+			self.saver.restore(self.sess, "./checkpoints/session_duelingDQN_6actions(Slow+MinSpeed=1)_(512,256)_(e=0.02).ckpt")
 			# "./checkpoints/session_duelingDQN_6actions(Slow+MinSpeed=1)_(512,256)_(e=0.02).ckpt")
 	
 	def display_text(self, text, x, y):
@@ -212,7 +212,7 @@ class Game:
 		if (len(collisions) != 0):
 			self.car.crash()
 			self.racetrack.reset(pygame.time.get_ticks())
-			reward = -200
+			reward = -500
 		
 		# Check collision with the finish line
 		elif (self.racetrack.finishLine.active):

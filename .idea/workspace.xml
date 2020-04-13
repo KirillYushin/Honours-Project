@@ -3,21 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="8859382c-287e-4306-8c31-74836399fe51" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/car.py" beforeDir="false" afterPath="$PROJECT_DIR$/car.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/checkpoints/checkpoint" beforeDir="false" afterPath="$PROJECT_DIR$/checkpoints/checkpoint" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/checkpoints/session_duelingDQN_4actions(Slow+MinSpeed=1)_(512,256)_(e=0.02).ckpt.data-00000-of-00001" beforeDir="false" afterPath="$PROJECT_DIR$/checkpoints/session_duelingDQN_4actions(Slow+MinSpeed=1)_(512,256)_(e=0.02).ckpt.data-00000-of-00001" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/checkpoints/session_duelingDQN_4actions(Slow+MinSpeed=1)_(512,256)_(e=0.02).ckpt.index" beforeDir="false" afterPath="$PROJECT_DIR$/checkpoints/session_duelingDQN_4actions(Slow+MinSpeed=1)_(512,256)_(e=0.02).ckpt.index" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/checkpoints/session_duelingDQN_4actions(Slow+MinSpeed=1)_(512,256)_(e=0.02).ckpt.meta" beforeDir="false" afterPath="$PROJECT_DIR$/checkpoints/session_duelingDQN_4actions(Slow+MinSpeed=1)_(512,256)_(e=0.02).ckpt.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/session_duelingDQN_6actions(Slow+MinSpeed=1)_(512,256)_150k.ckpt.data-00000-of-00001" beforeDir="false" afterPath="$PROJECT_DIR$/checkpoints/session_duelingDQN_6actions(Slow+MinSpeed=1)_(512,256)_150k.ckpt.data-00000-of-00001" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/session_duelingDQN_6actions(Slow+MinSpeed=1)_(512,256)_150k.ckpt.index" beforeDir="false" afterPath="$PROJECT_DIR$/checkpoints/session_duelingDQN_6actions(Slow+MinSpeed=1)_(512,256)_150k.ckpt.index" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/game.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nn.py" beforeDir="false" afterPath="$PROJECT_DIR$/nn.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stats/4actions(Slow+MinSpeed=1).csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/stats/4controls.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/stats/6controls(Slow+MinSpeed=1).csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/stats/6controls(Slow+MinSpeed=1)_improved.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/stats/DuelingDQN.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/stats/crashesPerLap.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/stats/session_duelingDQN_6actions(Slow+MinSpeed=1)_(1024,512).csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/stats/session_duelingDQN_6actions(Slow+MinSpeed=1)_(1024,512)_(e=0.01).csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stats/duelingDQN_6actions(Slow+MinSpeed=1)_(512,256)_150k/LR 0.1 Buffer 500/test.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stats/duelingDQN_6actions(Slow+MinSpeed=1)_(512,256)_150k/Notes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/stats/duelingDQN_6actions(Slow+MinSpeed=1)_(512,256)_150k/Notes.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stats/duelingDQN_6actions(Slow+MinSpeed=1)_(512,256)_150k/python_2020-04-11_20-04-07.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stats/duelingDQN_6actions(Slow+MinSpeed=1)_(512,256)_150k/python_2020-04-11_20-04-33.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/trainNN.py" beforeDir="false" afterPath="$PROJECT_DIR$/trainNN.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -86,20 +80,26 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state x="286" y="7" key="CommitChangelistDialog2" timestamp="1586709664235">
+    <state x="286" y="7" key="CommitChangelistDialog2" timestamp="1586797152822">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="286" y="7" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1586709664235" />
+    <state x="286" y="7" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1586797152822" />
     <state x="277" y="56" key="SettingsEditor" timestamp="1582254062022">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="277" y="56" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1582254062022" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1586741005409">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1586741005409" />
   </component>
 </project>

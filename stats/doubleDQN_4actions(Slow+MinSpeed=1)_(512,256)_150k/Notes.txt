@@ -1,0 +1,2 @@
+Slower. Completes less laps
+Worse at sensing collisions

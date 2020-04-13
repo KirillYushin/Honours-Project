@@ -37,16 +37,19 @@ mainQN = NeuralNetwork(gameStateSize, numActions, "main")
 targetQN = NeuralNetwork(gameStateSize, numActions, "target")
 lossPerEpoch = collections.deque()
 accumulatedLoss = 0
+averageQvalueEstimates = collections.deque()
+QvalueAccum = 0
+estimateCounter = 0
 
 saver = tf.train.Saver()
 with tf.Session() as sess:
 	#'''
-	#saver.restore(sess, "./checkpoints/session_duelingDQN_6actions(Slow+MinSpeed=1)_(1024,512)_(e=0.02)_150k.ckpt")
+	#saver.restore(sess, "./checkpoints/session_duelingDQN_6actions(Slow+MinSpeed=1)_(512,256)_(e=0.02).ckpt")
 	sess.run(tf.global_variables_initializer())
 	
 	frame = 0
 	state = game.get_state()                                        # initial state
-	while frame < 150000:
+	while frame <= 150000:
 		if (np.random.rand() < epsilon):                            # Select random action with probability epsilon (exploration)
 			action = np.random.randint(0, numActions)
 		else:                                                       # select action with the highest Q-value (exploitation)
@@ -68,6 +71,7 @@ with tf.Session() as sess:
 			Qvalues = sess.run(mainQN.predictions, feed_dict={mainQN.inputs: states})                   # predicted Q values for current state (for each experience)
 			bestFutureActions = sess.run(mainQN.predict_op, feed_dict={mainQN.inputs: nextStates})      # best action agent can do in the next state (for each experience)
 			targetQvalues = sess.run(targetQN.predictions, feed_dict={targetQN.inputs: nextStates})     # Q values for the next state from the target Q network (for each experience)
+			#targetQvalues = sess.run(mainQN.predictions, feed_dict={mainQN.inputs: nextStates})
 			
 			# Calculate target Q values for each mini-batch experience
 			for i in range(0, batchSize):
@@ -78,6 +82,8 @@ with tf.Session() as sess:
 					# (Double DQN) The action with the highest Q value from the next state is selected from the main network,
 					# but the Q value (future reward) of that action is taken from the target network
 					Qvalues[i][actions[i]] = rewards[i] + (gamma * targetQvalues[i][bestFutureActions[i]])
+					QvalueAccum += Qvalues[i][actions[i]]
+					estimateCounter += 1
 			
 			# Record loss
 			accumulatedLoss += sess.run(mainQN.loss, feed_dict={mainQN.inputs: states, mainQN.targets: Qvalues})
@@ -90,17 +96,21 @@ with tf.Session() as sess:
 			targetQN.copy_weights(sess, mainQN)
 			lossPerEpoch.append(accumulatedLoss)
 			accumulatedLoss = 0
+			averageQvalueEstimates.append(round(QvalueAccum / estimateCounter, 2))
+			QvalueAccum = 0
+			estimateCounter = 0
 		
 		# Decrement epsilon over time
 		if (epsilon > epsilonEnd):
 			epsilon -= 0.00002
-		
+			
 		if (epsilon > epsilonEnd and (frame % 5000 == 0)):
 			print("Epsilon:", round(epsilon, 2))
 		
 		# Save session
 		if (frame % 10000 == 0):
-			saver.save(sess, "./checkpoints/session_duelingDQN_6actions(Slow+MinSpeed=1)_(512,256)_(LR 0.1)_150k.ckpt")
+			saver.save(sess, "./checkpoints/session_duelingDQN_6actions(Slow+MinSpeed=1)_(512,256)_(e=0.02)_+20k.ckpt")
+			print("Frame:", frame)
 			
 		frame += 1
 	
@@ -119,6 +129,11 @@ with tf.Session() as sess:
 	with open('./stats/lossPerEpoch.csv', 'w', newline='') as file:
 		writer = csv.writer(file)
 		writer.writerow(lossPerEpoch)
+		
+	# Save average Q value Estimates per epoch
+	with open('./stats/averageQvalueEstimates.csv', 'w', newline='') as file:
+		writer = csv.writer(file)
+		writer.writerow(averageQvalueEstimates)
 	
 	# Run statistics
 	#label = "Adam optimiser"
@@ -172,8 +187,33 @@ with tf.Session() as sess:
 	plt.title("Loss over epochs")
 	#plt.legend()
 	
+	averageEstimates = []
+	i = 0
+	accumEstim = 0
+	try:
+		while True:
+			accumEstim += averageQvalueEstimates.popleft()
+			i += 1
+			if (i == 5):
+				averageEstimates.append(round(accumEstim / 5, 2))
+				i = 0
+				accumEstim = 0
+	
+	except IndexError:
+		if (i != 0):
+			averageEstimates.append(round(accumEstim / i, 2))
+	
+	averageEstimates = np.array(averageEstimates)
+	epochs = np.arange(1, len(averageEstimates) + 1, 1)
+	plt.figure(3)
+	plt.plot(epochs, averageEstimates)  # label=label
+	plt.xlabel('Epoch #')
+	plt.ylabel('Q Value Estimates')
+	plt.title("Average Q value estimates per epoch")
+	# plt.legend()
+	
 	if (len(game.racetrack.crashesPerLap) > 2):
-		plt.figure(3)
+		plt.figure(4)
 		game.racetrack.crashesPerLap.pop(0)  # first number is not representative of performance and messes the scale of the graph
 		crashes = np.array(game.racetrack.crashesPerLap)
 		laps = np.arange(1, len(crashes) + 1, 1)

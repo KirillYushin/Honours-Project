@@ -2,7 +2,7 @@ import numpy as np
 import collections
 import matplotlib.pyplot as plt
 import csv
-
+'''
 with open('./distanceTravelledUntilCrash.csv', 'r') as file:
 	reader = csv.reader(file)
 	for row in reader:
@@ -66,4 +66,37 @@ plt.plot(epochs, averageLoss) # label=label
 plt.xlabel('Epoch #')
 plt.ylabel('MSE Loss')
 plt.title("Loss over epochs")
+plt.show()
+'''
+
+with open('./averageQvalueEstimates.csv', 'r') as file:
+	reader = csv.reader(file)
+	for row in reader:
+		averageQvalueEstimates = collections.deque(row)
+		break
+
+averageEstimates = []
+i = 0
+accumEstim = 0
+try:
+	while True:
+		accumEstim += float(averageQvalueEstimates.popleft())
+		i += 1
+		if (i == 5):
+			averageEstimates.append(round(accumEstim / 5, 2))
+			i = 0
+			accumEstim = 0
+
+except IndexError:
+	if (i != 0):
+		averageEstimates.append(round(accumEstim / i, 2))
+
+averageEstimates = np.array(averageEstimates)
+epochs = np.arange(1, len(averageEstimates) + 1, 1)
+plt.figure(1)
+plt.plot(epochs, averageEstimates)  # label=label
+plt.xlabel('Epoch #')
+plt.ylabel('Q Value Estimates')
+plt.title("Average Q value estimates per epoch")
+# plt.legend()
 plt.show()

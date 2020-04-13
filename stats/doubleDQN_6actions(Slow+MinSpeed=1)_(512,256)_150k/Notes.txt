@@ -1,0 +1,3 @@
+Very fast and confident. But doesnt avoid collisions that well. Rams into walls at high speed sometimes.
+Still able to complete 30 laps during training.
+During test doesnt complete any tracks

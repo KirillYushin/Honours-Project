@@ -1,2 +1,2 @@
-model_checkpoint_path: "session_duelingDQN_6actions(Slow+MinSpeed=1)_(512,256)_(LR 0.1)_150k.ckpt"
-all_model_checkpoint_paths: "session_duelingDQN_6actions(Slow+MinSpeed=1)_(512,256)_(LR 0.1)_150k.ckpt"
+model_checkpoint_path: "session_duelingDQN_6actions(Slow+MinSpeed=1)_(512,256)_(e=0.02)_+20k.ckpt"
+all_model_checkpoint_paths: "session_duelingDQN_6actions(Slow+MinSpeed=1)_(512,256)_(e=0.02)_+20k.ckpt"

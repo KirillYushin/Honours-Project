@@ -42,6 +42,7 @@ class NeuralNetwork():
 		with tf.device("/gpu:0"):
 			h1 = tf.nn.relu(tf.matmul(X, self.w_h1) + self.b_h1)
 			h2 = tf.nn.relu(tf.matmul(h1, self.w_h2) + self.b_h2)
+			
 			# Split into separate advantage and value streams (Dueling DQN)
 			streamVal, streamAdv = tf.split(h2, num_or_size_splits=2, axis=1)
 			value = tf.matmul(streamVal, self.w_val) + self.b_val
@@ -49,7 +50,8 @@ class NeuralNetwork():
 			# Combine streams together to get the final Q-values
 			Qvalues = value + tf.subtract(advantage, tf.reduce_mean(advantage, axis=1, keep_dims=True))
 			return Qvalues
-			#return tf.matmul(h2, W_o) + B_o
+			
+			#return tf.matmul(h2, self.w_o) + self.b_o
 			
 	
 	# Copy weights from main Q network (Double DQN)
