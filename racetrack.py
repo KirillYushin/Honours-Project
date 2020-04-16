@@ -19,8 +19,8 @@ class Racetrack():
 			self.rewardLines = [RewardLine((700, 630), 0)]
 		elif (setup == "test3"):
 			self.prettyLayer = pygame.image.load("./images/testTrack/3/pretty_layer.png").convert_alpha()
-			self.finishLine = FinishLine((100, 280), 0)
-			self.rewardLines = [RewardLine((100, 500), 90)]
+			self.finishLine = FinishLine((565, 650), 90)
+			self.rewardLines = [RewardLine((320, 650), 0)]
 			
 		self.road = Road(setup)
 		self.roadGroup = pygame.sprite.Group(self.road)

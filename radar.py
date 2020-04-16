@@ -18,8 +18,8 @@ class Radar():
 			self.excludedPoints = [(699, 560), (699, 590), (699, 620), (699, 650), (671, 652), (702, 640), (702, 610), (702, 580), (708, 556)]
 		elif (setup == "test3"):
 			self.pointList = pygame.mask.from_surface((pygame.image.load("./images/testTrack/3/road_filled.png"))).outline(30)
-			self.pointList.extend([(1013, 12), (713, 590), (697, 590), (675, 684), (717, 684)])
-			self.excludedPoints = [(675, 684), (699, 618), (699, 648), (699, 678), (702, 669), (702, 639), (702, 609), (713, 590)]
+			self.pointList.extend([(337, 4), (1179, 338), (1179, 378), (1370, 371), (1370, 339)])
+			self.excludedPoints = [(1181, 350), (1211, 350), (1241, 350), (1271, 350), (1301, 350), (1331, 350), (1361, 350), (1349, 348), (1319, 348), (1289, 348), (1259, 348), (1229, 348), (1199, 348), (1179, 338), (1370, 371)]
 			
 		self.numBeams = 7
 		# Length of each beam

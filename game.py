@@ -32,7 +32,7 @@ class Game:
 		elif (setup == "test2"):
 			self.car = Car((400, 605), 90, setup, ai)
 		elif (setup == "test3"):
-			self.car = Car((110, 350), 0, setup, ai)
+			self.car = Car((670, 650), 270, setup, ai)
 		
 		self.racetrack = Racetrack(setup)
 		self.maxPoints = np.sum(self.car.radar.beamLength) + (self.car.maxSpeed * 20)
