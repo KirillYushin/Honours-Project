@@ -26,7 +26,7 @@ class Game:
 		self.simplifyRoad = False
 		self.drawDisplay = True
 		if (setup == "train" or setup == "test0"):
-			self.car = Car((230, 580), 55, setup, ai)
+			self.car = Car((370, 640), 270, setup, ai)
 		elif (setup == "test1"):
 			self.car = Car((580, 620), 90, setup, ai)
 		elif (setup == "test2"):
@@ -42,7 +42,7 @@ class Game:
 			self.mainQN = NeuralNetwork(self.car.radar.numBeams + 1, 6, "main")
 			self.saver = tf.train.Saver()
 			self.sess = tf.Session()
-			self.saver.restore(self.sess, "./checkpoints/session_duelingDQN_6actions(Slow+MinSpeed=1)_(512,256)_(e=0.02).ckpt")
+			self.saver.restore(self.sess, "./checkpoints/session_finalVersion.ckpt")
 			# "./checkpoints/session_duelingDQN_6actions(Slow+MinSpeed=1)_(512,256)_(e=0.02).ckpt")
 	
 	def display_text(self, text, x, y):
@@ -122,8 +122,6 @@ class Game:
 			# display distances
 			for i in range(self.car.radar.numBeams):
 				self.display_text("Dist" + str(i + 1) + ": " + str(self.car.radar.beamDist[i]), 1300, 10 + 20 * i)
-			#for j in range(len(self.racetrack.rewardLines)):
-				#self.display_text("Line" + str(j + 1) + ": " + str(self.racetrack.rewardLines[j].timeCrossed), 1300, 120 + 20 * j)
 		
 		'''
 		# Road split into individual lines that are used to find intersections with radar beams

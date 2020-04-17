@@ -71,7 +71,6 @@ with tf.Session() as sess:
 			Qvalues = sess.run(mainQN.predictions, feed_dict={mainQN.inputs: states})                   # predicted Q values for current state (for each experience)
 			bestFutureActions = sess.run(mainQN.predict_op, feed_dict={mainQN.inputs: nextStates})      # best action agent can do in the next state (for each experience)
 			targetQvalues = sess.run(targetQN.predictions, feed_dict={targetQN.inputs: nextStates})     # Q values for the next state from the target Q network (for each experience)
-			#targetQvalues = sess.run(mainQN.predictions, feed_dict={mainQN.inputs: nextStates})
 			
 			# Calculate target Q values for each mini-batch experience
 			for i in range(0, batchSize):
@@ -109,7 +108,7 @@ with tf.Session() as sess:
 		
 		# Save session
 		if (frame % 10000 == 0):
-			saver.save(sess, "./checkpoints/session_duelingDQN_6actions(Slow+MinSpeed=1)_(512,256)_(e=0.02)_+20k.ckpt")
+			saver.save(sess, "./checkpoints/session_finalVersion.ckpt")
 			print("Frame:", frame)
 			
 		frame += 1
@@ -136,7 +135,6 @@ with tf.Session() as sess:
 		writer.writerow(averageQvalueEstimates)
 	
 	# Run statistics
-	#label = "Adam optimiser"
 	averageDistanceTravelled = []
 	i = 0
 	accumDist = 0
@@ -156,11 +154,10 @@ with tf.Session() as sess:
 	averageDistanceTravelled = np.array(averageDistanceTravelled)
 	crashes = np.arange(1, len(averageDistanceTravelled) + 1, 1)
 	plt.figure(1)
-	plt.plot(crashes, averageDistanceTravelled) # label=label
+	plt.plot(crashes, averageDistanceTravelled)
 	plt.xlabel('10 Nearest Crashes')
 	plt.ylabel('Average distance travelled until crash')
 	plt.title("Average distance travelled over time")
-	#plt.legend()
 	
 	averageLoss = []
 	i = 0
@@ -181,11 +178,10 @@ with tf.Session() as sess:
 	averageLoss = np.array(averageLoss)
 	epochs = np.arange(1, len(averageLoss) + 1, 1)
 	plt.figure(2)
-	plt.plot(epochs, averageLoss) # label=label
+	plt.plot(epochs, averageLoss)
 	plt.xlabel('Epoch #')
 	plt.ylabel('MSE Loss')
 	plt.title("Loss over epochs")
-	#plt.legend()
 	
 	averageEstimates = []
 	i = 0
@@ -206,22 +202,21 @@ with tf.Session() as sess:
 	averageEstimates = np.array(averageEstimates)
 	epochs = np.arange(1, len(averageEstimates) + 1, 1)
 	plt.figure(3)
-	plt.plot(epochs, averageEstimates)  # label=label
+	plt.plot(epochs, averageEstimates)
 	plt.xlabel('Epoch #')
 	plt.ylabel('Q Value Estimates')
 	plt.title("Average Q value estimates per epoch")
-	# plt.legend()
 	
 	if (len(game.racetrack.crashesPerLap) > 2):
 		plt.figure(4)
 		game.racetrack.crashesPerLap.pop(0)  # first number is not representative of performance and messes the scale of the graph
 		crashes = np.array(game.racetrack.crashesPerLap)
 		laps = np.arange(1, len(crashes) + 1, 1)
-		plt.plot(laps, crashes) # label=label
+		plt.plot(laps, crashes)
 		plt.xlabel('Lap #')
 		plt.ylabel('Number of Crashes')
 		plt.title("Crashes per completed lap")
-		#plt.legend()
+		
 	plt.show()
 	
 	### session_doubleQ_6action
@@ -232,7 +227,7 @@ with tf.Session() as sess:
 	###### session_duelingDQN_6actions(Slow+MinSpeed=1)_(1024,512)     GOOD BASE
 	###### session_duelingDQN_6actions(Slow+MinSpeed=1)_(1024,512)_improved
 	######### session_duelingDQN_6actions(Slow+MinSpeed=1)_(1024,512)_(e=0.01)    or _improved
-	############ session_duelingDQN_6actions(Slow+MinSpeed=1)_(512,256)_(e=0.02)   BETTER BASE LESS OVERFIT
+	############ session_duelingDQN_6actions(Slow+MinSpeed=1)_(512,256)_(e=0.02)   BEST BASE LESS OVERFIT
 	'''
 	# load a trained network
 	saver.restore(sess, "./checkpoints/session_duelingDQN_6actions(Slow+MinSpeed=1)_(512,256)_(e=0.02).ckpt")
