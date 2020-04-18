@@ -199,7 +199,7 @@ class Game:
 		# Custom reward function
 		if (self.car.speed > 0):
 			# Award points based on how the action maximises distances and car speed
-			collectedPoints = np.sum(self.car.radar.beamDist) + (self.car.speed * 25)
+			collectedPoints = np.sum(self.car.radar.beamDist) + (self.car.speed * 25)  # add extra weight to speed
 			reward = round((collectedPoints / self.maxPoints) * 20, 2)
 		else:
 			# Punish if action did not move the car or made it stop

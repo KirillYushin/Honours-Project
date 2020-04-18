@@ -55,7 +55,7 @@ with tf.Session() as sess:
 		else:                                                       # select action with the highest Q-value (exploitation)
 			action = sess.run(mainQN.predict_op, feed_dict={mainQN.inputs: np.atleast_2d(state)})[0]
 		
-		reward = game.perform_action(action)                 # Perform selected action in the game and get the reward
+		reward = game.perform_action(action)                        # Perform selected action in the game and get the reward
 		newState = game.get_state()                                 # updated state after the action
 		if (game.quit):
 			break
@@ -72,7 +72,7 @@ with tf.Session() as sess:
 			bestFutureActions = sess.run(mainQN.predict_op, feed_dict={mainQN.inputs: nextStates})      # best action agent can do in the next state (for each experience)
 			targetQvalues = sess.run(targetQN.predictions, feed_dict={targetQN.inputs: nextStates})     # Q values for the next state from the target Q network (for each experience)
 			
-			# Calculate target Q values for each mini-batch experience
+			# Calculate target Q value for each mini-batch experience
 			for i in range(0, batchSize):
 				if (rewards[i] < 0):
 					Qvalues[i][actions[i]] = rewards[i]
